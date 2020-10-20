@@ -44,4 +44,8 @@
 
 注意：标粗的地方即代码中line 24，e.g. 寻找1,3,3的下一个排列时，1先和后面的3交换，而不是前面的3，然后再做逆序
 
+P.S.：Java中Arrays没有定义reverse()方法，需要自己写
+
+P.S.：一开始自己写的时候用的是Arrays.sort(int[] a, int fromIndex, int toIndex)，时间复杂度不如arrayReverse()操作，并且注意toIndex是不被包括进去的，类似python的range()
+
 时间复杂度：O(N)，空间复杂度：O(1)
