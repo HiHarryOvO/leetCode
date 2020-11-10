@@ -76,4 +76,41 @@ class Solution {
 
         return res.reverse().toString();
     }
+
+    // 方法2：维护数组
+    public String multiply(String num1, String num2) {
+        if (num1.equals("0") || num2.equals("0")) {
+            return "0";
+        }
+        int m = num1.length();
+        int n = num2.length();
+        // 结果最多为m + n位，最少为m + n - 1位
+        int[] result = new int[m + n];
+        int first, second;
+
+        for (int i = m - 1; i >=0; i--) {
+            first = num1.charAt(i) - '0';
+            for (int j = n - 1; j >= 0; j--) {
+                second = num2.charAt(j) - '0';
+                result[i+j+1] += first * second;
+            }
+        }
+
+        // 从后往前维护进位
+        for (int i = m + n - 1; i > 0; i--) {
+            result[i-1] += result[i] / 10;
+            result[i] %= 10;
+        }
+
+        // 在这里需要判断结果到底是m + n位还是m + n - 1位
+        int idx = (result[0] == 0)? 1 : 0;
+        StringBuilder ans = new StringBuilder();
+
+        // 整数数组转字符串
+        while (idx < m + n) {
+            ans.append(result[idx]);
+            idx++;
+        }
+        return ans.toString();
+    }
 }
