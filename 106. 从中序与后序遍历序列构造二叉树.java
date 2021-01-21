@@ -13,6 +13,8 @@
  *     }
  * }
  */
+
+// 递归解法
 class Solution {
     private int[] inorder;
     private int[] postorder;
@@ -45,6 +47,39 @@ class Solution {
         root.right = myBuildTree(rootPos + 1, inR);
         root.left = myBuildTree(inL, rootPos - 1);
         
+        return root;
+    }
+}
+
+// 迭代解法
+class Solution {
+    public TreeNode buildTree(int[] inorder, int[] postorder) {
+        if (postorder == null || postorder.length == 0) {
+            return null;
+        }
+
+        Deque<TreeNode> stack = new LinkedList<>();
+        int n = postorder.length;
+        TreeNode root = new TreeNode(postorder[n - 1]);
+        stack.push(root);
+        int inorderIndex = n - 1;
+        // 倒序迭代        
+        for (int i = n - 2; i >= 0; i--) {
+            int postorderVal = postorder[i];
+            TreeNode node = stack.peek();
+            if (node.val != inorder[inorderIndex]) {
+                node.right = new TreeNode(postorderVal);
+                stack.push(node.right);
+            } else {
+                // 出现相同的情况时寻找此处的postorderVal是哪个节点的左儿子
+                while (!stack.isEmpty() && stack.peek().val == inorder[inorderIndex]) {
+                    inorderIndex--;
+                    node = stack.pop();
+                }
+                node.left = new TreeNode(postorderVal);
+                stack.push(node.left);
+            }
+        }
         return root;
     }
 }
