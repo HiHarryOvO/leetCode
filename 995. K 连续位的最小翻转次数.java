@@ -40,15 +40,22 @@ class Solution {
 class Solution {
     public int minKBitFlips(int[] A, int K) {
         int n = A.length;
+        // 创建差分数组
         int[] diff = new int[n + 1];
         int ans = 0, revCnt = 0;
         for (int i = 0; i < n; i++) {
+            // 如果差分数组为0，则表明A[i]和A[i-1]翻转次数相同，revCnt保持不变
+            // 如果差分数组为1，则翻转次数不同，revCnt取反
             revCnt ^= diff[i];
+
+            // 需要翻转
             if (A[i] == revCnt) {
+                // 注意此处没有等号
                 if (i + K > n) {
                     return -1;
                 }
                 ans++;
+                // 翻转区间[i, i + K - 1]时，差分数组只有i + K处改变
                 diff[i + K] ^= 1;
                 revCnt ^= 1;
             }
@@ -65,7 +72,7 @@ class Solution {
         for (int i = 0; i < n; i++) {
             if (i >= K && A[i - K] > 1) {
                 revCnt ^= 1;
-                A[i - K] -= 2;
+                A[i - K] -= 2; // 看是否要求复原数组元素
             }
 
             if (A[i] == revCnt) {
