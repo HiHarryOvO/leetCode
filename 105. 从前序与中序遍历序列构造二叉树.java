@@ -78,3 +78,38 @@ class Solution {
         return root;
     }
 }
+
+// 迭代解法
+class Solution {
+    public TreeNode buildTree(int[] preorder, int[] inorder) {
+        // 边界情况
+        if (preorder == null || preorder.length == 0) {
+            return null;
+        }
+        // 使用栈记录节点
+        Deque<TreeNode> stack = new ArrayDeque<>();
+        TreeNode root = new TreeNode(preorder[0]);
+        stack.push(root);
+
+        // 记录inorder数组的位置
+        int inOrderIndex = 0;
+        for (int i = 1; i < preorder.length; i++) {
+            int preOrderVal = preorder[i];
+            TreeNode node = stack.peek();
+            // 通过比较确定是否应该继续向左走
+            if (node.val != inorder[inOrderIndex]) {
+                node.left = new TreeNode(preOrderVal);
+                stack.push(node.left);
+            } else {
+                // 确定应该在哪里插入右儿子节点
+                while (!stack.isEmpty() && stack.peek().val == inorder[inOrderIndex]) {
+                    node = stack.pop();
+                    inOrderIndex++;
+                }
+                node.right = new TreeNode(preOrderVal);
+                stack.push(node.right);
+            }
+        }
+        return root;
+    }
+}
