@@ -42,7 +42,7 @@ class Solution {
         dp[sLen][tLen] = 1;
         
         for (int j = tLen; j >= 0; j--) {
-            // i在sLen处时，默认为0
+            // i在sLen处时，默认为0（这里条件可以改为 i >= j）
             for (int i = sLen - 1; i >= 0; i--) {
                 // t[j:]长度为0时，一定有1个匹配
                 if (j == tLen) {
