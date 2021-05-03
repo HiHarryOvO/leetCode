@@ -2634,3 +2634,19 @@ if twos == 1:
 时间复杂度：O(n)
 
 空间复杂度：O(n)
+
+------
+
+7-整数反转
+
+重点：数学，整数越界
+
+本题重点是如何判断整数是否越界。如果没有限制时，可以使用long。
+
+有限制时，需要在计算反转的过程中判断，根据[官方解答](https://leetcode-cn.com/problems/reverse-integer/solution/zheng-shu-fan-zhuan-by-leetcode-solution-bccn/)，可以证明在 rev > INT_MAX // 10时一定越界，反之亦然（原因是INT_MAX = 2147483647，因此最后的digit一定是1或者2，不会超过7）
+
+注意：python负数整除后向下取整，**不是**去掉小数部分。
+
+时间复杂度：O(log |x|)
+
+空间复杂度：O(1)
