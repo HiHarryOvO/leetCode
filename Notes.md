@@ -1953,6 +1953,14 @@ python交换字符顺序：`ch[x], ch[i] = ch[i], ch[x]`
 
 空间复杂度：O(n)，n为数据流元素总个数
 
+*21.06.23补充*
+
+python默认是小顶堆，谨记。
+
+对于python，从空列表开始就不用heapify，否则需要heapify。
+
+根据heapq文档，对于小顶堆中push然后pop取最小值，使用`heappushpop(heap, item)`效率更高。
+
 ------
 
 剑指Offer 42-连续子数组的最大和
@@ -2086,6 +2094,14 @@ python的operator模块提供了add, sub, mul三个函数，除法由于保留�
 时间复杂度：O(n log n)
 
 空间复杂度：O(n)
+
+*21.06.23补充*
+
+注意：先从右边开始
+
+注意`strs[i] + strs[l] <= strs[l] + strs[i]`中间需要有等号（对j也成立），防止重复时不收敛。
+
+注意在移动i和j的过程中还是需要判断`i < j`。
 
 ------
 
