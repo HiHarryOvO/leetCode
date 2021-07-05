@@ -3652,6 +3652,8 @@ python的`sorted(dic)`获得的是排序后的keys，不包含values。
 
 需要知道有`str.isdigit()`，`str.islower()`以及`str.isupper()`这三个字符串处理函数
 
+python修改变量作用域可以使用nonlocal
+
 *复杂度*
 
 时间复杂度：worst case - 栈有 O(n) 层，每次出栈时更新 O(n) 个元素，因此为 O(n ^ 2)
