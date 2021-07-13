@@ -3720,11 +3720,11 @@ python修改变量作用域可以使用nonlocal
 
 重点：哈希表，二分查找
 
-哈希表存数组，然后二分查找。注意边界情况（key不存在 的情况，以及查询时间戳小于最早时间戳 的情况）。
+哈希表存数组，然后二分查找。注意边界情况（key 不存在 的情况，以及查询时间戳小于最早时间戳 的情况）。
 
-时间复杂度：初始化和`set`都是O(1)。`get`为O(log n)，这个n取决于查询的key对应的数组长度，也就是当前key的`set`的次数。
+时间复杂度：初始化和 `set` 都是 O(1)。`get` 为 O(log n)，这个 n 取决于查询的 key 对应的数组长度，也就是当前 key 的 `set` 的次数。
 
-空间复杂度：O(n)，取决于`set`的次数。
+空间复杂度：O(n)，取决于 `set` 的次数。
 
 ------
 
@@ -3732,7 +3732,7 @@ python修改变量作用域可以使用nonlocal
 
 重点：扫描线，堆
 
-完全参考的是leetcode的 @宫水三叶 dalao的[解答](https://leetcode-cn.com/problems/the-skyline-problem/solution/gong-shui-san-xie-sao-miao-xian-suan-fa-0z6xc/)，扫描线的核心在于将不规则的形状按照水平或者垂直的方式，划分成若干个规则的矩形。
+完全参考的是 leetcode 的 @宫水三叶 大佬的[解答](https://leetcode-cn.com/problems/the-skyline-problem/solution/gong-shui-san-xie-sao-miao-xian-suan-fa-0z6xc/)，扫描线的核心在于将不规则的形状按照水平或者垂直的方式，划分成若干个规则的矩形。
 
 使用相邻两个横坐标以及当前的**最大高度**，可以确定一个矩形。
 
@@ -3744,8 +3744,11 @@ python修改变量作用域可以使用nonlocal
 
 - 右端点，意味着之前某一条往右延展的线结束了，**指定高度出队**
 
-如果当前高度与上一个点时候的最大高度不同，则获得一个关键点，需要使用变量prev记录前一个最大高度。
+如果当前高度与上一个点时候的最大高度不同，则获得一个关键点，需要使用变量 prev 记录前一个最大高度。
 
-时间复杂度：如果使用堆，尽管插入是O(log n)，但是指定一个值出队需要O(n)，总体为O(n ^ 2)；如果使用基于红黑树的有序列表，则插入、删除都是O(log n)，总体为O(n log n)
+实现细节：Python 的 heapq 没有 remove 操作，因此需要使用 List 自带的 remove 操作，然后重新 heapify，这个过程效率很低。
+Python 可以使用 `sortedcontainers.SortedList`，效率很高。
+
+时间复杂度：如果使用堆，尽管插入是 O(log n)，但是指定一个值出队需要 O(n)，总体为 O(n ^ 2)；如果使用基于红黑树的有序列表，则插入、删除都是 O(log n)，总体为 O(n log n)
 
 空间复杂度：O(n)
