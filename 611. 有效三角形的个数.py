@@ -5,6 +5,7 @@ class Solution:
         if n < 3:
             return 0
 
+        # 排序
         nums.sort()
         ans = 0
 
